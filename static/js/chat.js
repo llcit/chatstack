@@ -3,8 +3,17 @@ var socket = io.connect("http://localhost:9000/livethread");
 
 socket.on('connect', function () {
     $('#chat').addClass('connected');
-    // SPECIFY THREAD ID
-    socket.emit('join',  $('#thread_id').val()); 
+    // SPECIFY THREAD ID TO SPECIFY ROOM
+    socket.emit( 'join',  $('#thread_id').val() );
+
+    socket.emit('nickname', $('#user_id').val(), function (set) {
+            if (set) {
+                clear();
+                return $('#chat').addClass('nickname-set');
+            }
+            $('#nickname-err').css('visibility', 'visible');
+        }); 
+
 });
 
 socket.on('announcement', function (msg) {
@@ -36,6 +45,10 @@ socket.on('error', function (e) {
 function message (from, msg) {
     $('#lines').append($('<p>').append($('<b>').text(from), msg));
 }
+
+function clear () {
+    $('#message').val('').focus();
+};
 
 // DOM manipulation
 $(function () {

@@ -13,21 +13,26 @@
 <body>
 <h1>{{ object.name }} Thread:</h1>
 <input id="thread_id" type="hidden" value="{{ object.id }}"/>
+<input id="user_id" type="hidden" value="{{ user }}"/>
 <div id="chat">
-  <div id="nickname">
+
+  <!-- <div id="nickname">
     <form id="set-nickname" class="wrap">
       <p>Please type in your nickname and press enter.</p>
       <input id="nick">
       <p id="nickname-err">Nickname already in use</p>
   </form>
-  </div>
-  <div id="connecting">
+  </div> -->
+
+  <div id="connecting"> <!-- overlaid over entire panel while estabishing connection -->
     <div class="wrap">Connecting to socket.io server</div>
   </div>
+
   <div id="messages">
     <div id="nicknames"><span>Online:</span></div>
     <div id="lines"></div>
   </div>
+
   <form id="send-message">
     <input id="message">
     <button>Send</button>

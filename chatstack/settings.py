@@ -37,7 +37,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'chatstack',
     'livethread',
     'south',
 )
@@ -73,7 +72,7 @@ TEMPLATE_DIRS = os.path.join(BASE_DIR, 'templates')
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Pacific/Honolulu'
 
 USE_I18N = True
 
@@ -121,3 +120,6 @@ LOGGING = {
         },
     },
 }
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = '/threads'

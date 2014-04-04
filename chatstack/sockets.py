@@ -21,15 +21,16 @@ class ThreadNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
     def on_join(self, room):
         self.room = room
         self.join(room)
+        self.log("Joining room.")
         return True
         
     def on_nickname(self, nickname):
-        self.log('Nickname: {0}'.format(nickname))
+        self.log('Connected nickname is: {0}'.format(nickname))
         self.nicknames.append(nickname)
         self.socket.session['nickname'] = nickname
-        self.broadcast_event('announcement', '%s has connected' % nickname)
-        self.broadcast_event('nicknames', self.nicknames)
-        return True, nickname
+        # self.broadcast_event('announcement', '%s has connected' % nickname)
+        # self.broadcast_event('nicknames', self.nicknames)
+        return nickname
 
     def recv_disconnect(self):
         # Remove nickname from the list.

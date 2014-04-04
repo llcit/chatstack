@@ -1,4 +1,4 @@
-/readme.txt
+readme.txt
 
 To start websocket server:
 python /chatstack/run.py

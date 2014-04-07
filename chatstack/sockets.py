@@ -9,7 +9,7 @@ from socketio.namespace import BaseNamespace
 from socketio.mixins import RoomsMixin, BroadcastMixin
 from socketio.sdjango import namespace
 from django.contrib.auth.models import User
-import pdb
+# import pdb
 from livethread.models import ThreadSpace,ThreadMessage
 
 # from django.contrib.auth.models import User
@@ -43,11 +43,11 @@ class ThreadNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
     def on_join(self, room):
         self.room = room
         self.join(room)
-        try: 
-            self.socket.session['threadspace'] = ThreadSpace.objects.get(pk=room)
-        except:
-            self.broadcast_event('error', '%s is not valid activity and has disconnected' % room)
-        self.log("Joining room.")
+        # try: 
+        #     self.socket.session['threadspace'] = ThreadSpace.objects.get(pk=room)
+        # except:
+        #     self.broadcast_event('error', '%s is not valid activity and has disconnected' % room)
+        # self.log("Joining room.")
         return True
 
     def on_nickname(self, nickname):
@@ -63,12 +63,12 @@ class ThreadNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
 
 ## Added by Hao
         # pdb.set_trace()
-        try:
-            self.socket.session['DjangoUser']= User.objects.get(username=nickname)
-        except:
-            self.broadcast_event('error', '%s is not valid user and has disconnected' % nickname)
-            self.disconnect(silent=True)
-            return False
+        # try:
+        #     self.socket.session['DjangoUser']= User.objects.get(username=nickname)
+        # except:
+        #     self.broadcast_event('error', '%s is not valid user and has disconnected' % nickname)
+        #     self.disconnect(silent=True)
+        #     return False
 
 
 
@@ -100,12 +100,12 @@ class ThreadNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
 
 
 ## Added by Hao
-        self.log('User message: {0}'.format(msg))
-        try:
-            ThreadMessage(thread= self.session['threadspace'], user= self.session['DjangoUser'], text=msg).save()
-            print "message successfully saved to database"
-        except:
-            pass
+        # self.log('User message: {0}'.format(msg))
+        # try:
+        #     ThreadMessage(thread= self.session['threadspace'], user= self.session['DjangoUser'], text=msg).save()
+        #     print "message successfully saved to database"
+        # except:
+        #     pass
 
 
         self.emit_to_room(self.room, 'msg_to_room', self.socket.session['nickname'], msg)

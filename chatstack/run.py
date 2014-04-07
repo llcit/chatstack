@@ -5,7 +5,7 @@ from socketio.server import SocketIOServer
 import django.core.handlers.wsgi
 import os
 import sys
-from django.db import connections
+# from django.db import connections
 
 monkey.patch_all()
 
@@ -22,7 +22,7 @@ PORT = 9000
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
 ########## This should do the trick ###########
-connections['default'].allow_thread_sharing = True
+# connections['default'].allow_thread_sharing = True
 
 application = django.core.handlers.wsgi.WSGIHandler()
 

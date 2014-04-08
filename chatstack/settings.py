@@ -93,6 +93,8 @@ STATICFILES_DIRS = (
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = '/web/static/chatstack'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
